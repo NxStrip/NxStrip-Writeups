@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Writeup | NxStrip</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://nxstrip-writeups.vercel.app/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -28,7 +28,7 @@
         const fileName = urlParams.get('file');
 
         if (fileName) {
-            fetch(`writeups/${fileName}`)
+            fetch(`https://nxstrip-writeups.vercel.app/writeups/${fileName}`)
                 .then(response => {
                     if (!response.ok) throw new Error("File not found");
                     return response.text();
