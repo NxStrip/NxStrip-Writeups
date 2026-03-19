@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NxStrip | Security Research</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Nx<span>Strip</span></a>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="writeups.html">Writeups</a></li>
+                </ul>
+                <button id="theme-toggle" aria-label="Toggle Theme">
+                    <span class="icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="container section-padding">
+        <div class="about-content">
+            <h1>Hi, I'm <span class="highlight">NxStrip</span></h1>
+            <p class="bio">Check out my writeups below and my information are in about me.</p>
+        </div>
+    </section>
+
+    <main class="container section-padding" style="padding-top: 0;">
+        <div class="section-header">
+            <h2>Latest Research</h2>
+            <a href="writeups.html" class="btn-more">View All →</a>
+        </div>
+        <hr class="divider">
+        <div id="latest-grid" class="grid"></div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 NxStrip Research. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="db.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

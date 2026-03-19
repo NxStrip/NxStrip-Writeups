@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Writeup | NxStrip</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Nx<span>Strip</span></a>
+            <a href="writeups.html" class="btn-more">← Back</a>
+        </div>
+    </nav>
+
+    <main class="container section-padding">
+        <div id="content" class="markdown-body">
+            <p>Loading exploit data...</p>
+        </div>
+    </main>
+
+    <script>
+        // Get the filename from the URL (e.g., post.html?file=waf-bypass.md)
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('file');
+
+        if (fileName) {
+            fetch(`writeups/${fileName}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found");
+                    return response.text();
+                })
+                .then(text => {
+                    document.getElementById('content').innerHTML = marked.parse(text);
+                    hljs.highlightAll(); // Makes your code snippets look pro
+                })
+                .catch(err => {
+                    document.getElementById('content').innerHTML = "<h1>404: Writeup not found</h1>";
+                });
+        }
+    </script>
+</body>
+</html>

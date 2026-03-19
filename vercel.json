@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    { 
+      "source": "/about", 
+      "destination": "https://nxstrip.vercel.app/" 
+    },
+    { 
+      "source": "/about/:match*", 
+      "destination": "https://nxstrip.vercel.app/:match*" 
+    }
+  ]
+}

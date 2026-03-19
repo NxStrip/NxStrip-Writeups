@@ -1,0 +1,122 @@
+:root[data-theme="dark"] {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --text-main: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --border: #30363d;
+    --header-color: #ffffff;
+}
+
+:root[data-theme="light"] {
+    --bg: #f6f8fa;
+    --card-bg: #ffffff;
+    --text-main: #24292f;
+    --text-dim: #57606a;
+    --accent: #0969da;
+    --border: #d0d7de;
+    --header-color: #1b1f24;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.3s, color 0.3s; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 4rem 0; }
+.highlight { color: var(--accent); }
+
+/* Navigation */
+nav { padding: 1.5rem 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+nav .container { display: flex; justify-content: space-between; align-items: center; }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.logo { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-decoration: none; color: var(--header-color); font-size: 1.4rem; }
+.logo span { color: var(--accent); }
+nav ul { display: flex; list-style: none; gap: 2rem; }
+nav ul a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; font-weight: 600; }
+
+/* Theme Toggle */
+#theme-toggle { background: var(--card-bg); border: 1px solid var(--border); padding: 8px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* About Section */
+.bio { font-size: 1.25rem; color: var(--text-dim); margin-top: 1rem; max-width: 600px; }
+.skills { margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.skills span { background: var(--border); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-family: 'JetBrains Mono'; }
+
+/* Writeups Grid */
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; }
+.btn-more { text-decoration: none; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+.divider { border: 0; border-top: 1px solid var(--border); margin-bottom: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover { border-color: var(--accent); transform: translateY(-3px); transition: 0.2s; }
+.platform-tag { font-family: 'JetBrains Mono'; font-size: 0.7rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: block; }
+.card h3 { color: var(--header-color); margin-bottom: 0.5rem; font-size: 1.1rem; }
+.card p { color: var(--text-dim); font-size: 0.9rem; flex-grow: 1; }
+
+/* Markdown Reader Improvements */
+.markdown-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    color: var(--header-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.markdown-body h1 { border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+
+.markdown-body p { margin-bottom: 1.5rem; color: var(--text-main); }
+
+/* Pro Code Blocks */
+.markdown-body pre {
+    background: #000 !important;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.markdown-body code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+}
+
+/* Image styling inside writeups */
+.markdown-body img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* Blockquotes for "Analysis" notes */
+.markdown-body blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-dim);
+}
