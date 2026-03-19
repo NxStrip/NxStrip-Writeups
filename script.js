@@ -19,6 +19,7 @@ if (localStorage.getItem('theme')) {
 function createCard(post) {
     const card = document.createElement('a');
     card.href = post.link;
+    card.target = "_top"; // This is the key fix for the rewrite layout
     card.className = 'card';
     card.innerHTML = `
         <span class="platform-tag">${post.tag}</span>
