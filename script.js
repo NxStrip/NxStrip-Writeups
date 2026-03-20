@@ -119,3 +119,41 @@ if (allWriteupsGrid && typeof writeups !== 'undefined') {
         });
     }
 }
+
+// ==========================================
+// 📋 COPY TO CLIPBOARD LOGIC
+// ==========================================
+function addCopyButtons() {
+    const markdownBody = document.querySelector('.markdown-body');
+    if (!markdownBody) return;
+
+    const codeBlocks = markdownBody.querySelectorAll('pre');
+
+    codeBlocks.forEach((codeBlock) => {
+        // Prevent adding multiple buttons if the script runs twice
+        if (codeBlock.querySelector('.copy-code-button')) return;
+
+        const button = document.createElement('button');
+        button.className = 'copy-code-button';
+        button.type = 'button';
+        button.innerText = 'Copy';
+
+        button.addEventListener('click', () => {
+            const code = codeBlock.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        });
+
+        codeBlock.appendChild(button);
+    });
+}
+
+// Run it on page load
+document.addEventListener('DOMContentLoaded', addCopyButtons);
