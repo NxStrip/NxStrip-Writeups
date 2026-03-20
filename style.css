@@ -515,3 +515,14 @@ footer {
 .about-content h1 .highlight {
     color: var(--accent) !important;
 }
+
+/* Sticky Footer Fix for Empty Search Results */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+main {
+    flex-grow: 1; 
+}
