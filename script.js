@@ -1,4 +1,4 @@
-// Theme Toggle
+// --- THEME LOGIC ---
 const themeBtn = document.getElementById('theme-toggle');
 const htmlTag = document.documentElement;
 
@@ -9,13 +9,25 @@ themeBtn.addEventListener('click', () => {
     localStorage.setItem('theme', newTheme);
 });
 
-if (localStorage.getItem('theme')) {
-    const saved = localStorage.getItem('theme');
-    htmlTag.setAttribute('data-theme', saved);
-    themeBtn.querySelector('.icon').innerText = saved === 'dark' ? '🌙' : '☀️';
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    htmlTag.setAttribute('data-theme', savedTheme);
+    if(themeBtn) themeBtn.querySelector('.icon').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
 }
 
-// Card Generator
+// --- ACTIVE LINK HIGHLIGHTING ---
+// This finds which page you are on and highlights the correct nav link
+const currentPath = window.location.pathname;
+const navLinks = document.querySelectorAll('.nav-links a');
+
+navLinks.forEach(link => {
+    if (link.getAttribute('href').includes(currentPath) && currentPath !== "/") {
+        link.classList.add('active');
+    }
+});
+
+// --- CARD GENERATOR ---
 function createCard(post) {
     const card = document.createElement('a');
     card.href = post.link;
@@ -31,6 +43,7 @@ function createCard(post) {
 // --- HOMEPAGE LOGIC (Latest 3) ---
 const latestGrid = document.getElementById('latest-grid');
 if (latestGrid) {
+    // Show only the 3 most recent writeups
     writeups.slice(0, 3).forEach(post => latestGrid.appendChild(createCard(post)));
 }
 
@@ -46,30 +59,25 @@ if (allWriteupsGrid) {
         data.forEach(post => allWriteupsGrid.appendChild(createCard(post)));
     }
 
-    // Initial Load
     renderWriteups(writeups);
 
-    // Filter Logic
     function applyFilters() {
         const platformVal = platformFilter.value;
         const ctfVal = ctfFilter.value;
-
         let filtered = writeups;
 
         if (platformVal !== 'all') {
             filtered = filtered.filter(w => w.category === 'Platform' && w.tag === platformVal);
-            ctfFilter.value = 'all'; // Reset the other dropdown
+            ctfFilter.value = 'all'; 
         } else if (ctfVal !== 'all') {
             filtered = filtered.filter(w => w.category === 'CTF' && w.tag === ctfVal);
-            platformFilter.value = 'all'; // Reset the other dropdown
+            platformFilter.value = 'all';
         }
-
         renderWriteups(filtered);
     }
 
     platformFilter.addEventListener('change', applyFilters);
     ctfFilter.addEventListener('change', applyFilters);
-
     resetBtn.addEventListener('click', () => {
         platformFilter.value = 'all';
         ctfFilter.value = 'all';
