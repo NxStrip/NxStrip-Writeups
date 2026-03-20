@@ -130,7 +130,6 @@ function addCopyButtons() {
     const codeBlocks = markdownBody.querySelectorAll('pre');
 
     codeBlocks.forEach((codeBlock) => {
-        // Prevent adding multiple buttons if the script runs twice
         if (codeBlock.querySelector('.copy-code-button')) return;
 
         const button = document.createElement('button');
@@ -139,6 +138,7 @@ function addCopyButtons() {
         button.innerText = 'Copy';
 
         button.addEventListener('click', () => {
+            // Get text from the <code> tag inside <pre>
             const code = codeBlock.querySelector('code').innerText;
             navigator.clipboard.writeText(code).then(() => {
                 button.innerText = 'Copied!';
@@ -155,5 +155,5 @@ function addCopyButtons() {
     });
 }
 
-// Run it on page load
+// Keep this for pages that might have static code blocks
 document.addEventListener('DOMContentLoaded', addCopyButtons);
