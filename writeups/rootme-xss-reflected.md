@@ -58,4 +58,3 @@ To capture the flag, I needed to exfiltrate the `document.cookie` to an attacker
 1. **Context-Aware Encoding:** The application should use an HTML entity encoder specifically designed for attributes. In this case, single quotes should be encoded as `&#39;` or `&apos;`.
 2. **Content Security Policy (CSP):** Implementing a strict CSP that disallows inline scripts and `eval()` would have mitigated this attack, even if the injection was successful.
 3. **Input Validation:** Use a whitelist of allowed paths for the `?p=` parameter instead of reflecting raw user input.
-```
