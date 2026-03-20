@@ -1,9 +1,9 @@
 # XSS - Reflected (Attribute Injection)
 
 **Date:** March 20, 2026  
-**Platform:** Root-Me
-**Difficulty:** Easy
-**Category:** Web / Client-Side
+**Platform:** Root-Me  
+**Difficulty:** Easy  
+**Category:** Web / Client-Side  
 
 ## 📝 Executive Summary
 This challenge demonstrates a reflected Cross-Site Scripting (XSS) vulnerability via HTML attribute injection. By breaking out of an existing `<a>` tag attribute, I was able to inject a malicious event handler to steal the administrator's session cookie without requiring a direct click.
