@@ -6,6 +6,7 @@
     
     <title>NxStrip | Writeups</title>
     <meta name="description" content="Detailed security analysis and exploit documentation by NxStrip.">
+    <meta name="author" content="NxStrip">
     
     <meta property="og:type" content="article">
     <meta property="og:title" content="NxStrip | Security Writeup">
@@ -26,77 +27,78 @@
 </head>
 <body>
     <nav>
-        <div class="container">
+        <div class="container nav-wrapper">
             <a href="index.html" class="logo">Nx<span>Strip</span></a>
-            <a href="writeups.html" class="btn-more">← Back</a>
+            <a href="writeups.html" class="btn-more">← Back to Gallery</a>
         </div>
     </nav>
 
     <main class="container section-padding">
         <div id="content" class="markdown-body">
-            <p style="color: #00ff00; font-family: 'Courier New', monospace;">Initializing secure connection to database...</p>
+            <p style="color: #58a6ff; font-family: 'JetBrains Mono', monospace;">[!] Establishing secure connection to database node...</p>
         </div>
     </main>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 NxStrip. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-const fileName = urlParams.get('file');
-const contentDiv = document.getElementById('content');
+        const fileName = urlParams.get('file');
+        const contentDiv = document.getElementById('content');
 
-if (fileName) {
-    fetch(`writeups/${fileName}`)
-        .then(response => {
-            if (!response.ok) throw new Error("NODE_UNREACHABLE");
-            return response.text();
-        })
-        .then(text => {
-            contentDiv.innerHTML = marked.parse(text);
-            const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
-            document.title = `${cleanName} | NxStrip Intelligence`;
-            hljs.highlightAll(); 
-        })
-        .catch(err => {
-            renderError("NODE_UNREACHABLE");
-        });
-} else {
-    renderError("NO_FILE_SPECIFIED");
-}
+        if (fileName) {
+            fetch(`writeups/${fileName}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("NODE_UNREACHABLE");
+                    return response.text();
+                })
+                .then(text => {
+                    contentDiv.innerHTML = marked.parse(text);
+                    const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
+                    document.title = `${cleanName} | NxStrip Intelligence`;
+                    hljs.highlightAll(); 
+                })
+                .catch(err => {
+                    renderError("NODE_UNREACHABLE");
+                });
+        } else {
+            renderError("NO_FILE_SPECIFIED");
+        }
 
-function renderError(code) {
-    contentDiv.innerHTML = `
-        <div style="text-align: center; padding: 40px 10px; font-family: 'Courier New', monospace;">
-            <h1 style="font-size: clamp(3rem, 15vw, 5rem); color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0;">404</h1>
-            
-            <div style="display: inline-block; max-width: 100%; overflow: hidden;">
-                <p id="error-status" style="color: #00ff00; font-size: clamp(0.9rem, 4vw, 1.2rem); margin: 15px 0; border-right: 2px solid #00ff00; white-space: nowrap; overflow: hidden; width: 26ch; animation: typing 2s steps(26), blink .5s step-end infinite;">
-                    STATUS: ${code}...
-                </p>
-            </div>
-
-            <p style="color: #888; font-size: 0.9rem; margin-bottom: 30px; line-height: 1.4;">
-                The requested writeup is either redacted, moved, or does not exist in the current database.
-            </p>
-            
-            <a href="writeups.html" style="background: #00ff00; color: #0a0a0a; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 2px; text-transform: uppercase; display: inline-block;">
-                > RETURN_TO_HOME
-            </a>
-        </div>
-        <style>
-            @keyframes typing { from { width: 0 } }
-            @keyframes blink { 50% { border-color: transparent } }
-            
-            /* Remove typing animation on very small screens to prevent layout break */
-            @media (max-width: 400px) {
-                #error-status { 
-                    white-space: normal !important; 
-                    width: auto !important; 
-                    border-right: none !important; 
-                    animation: none !important; 
-                }
-            }
-        </style>
-    `;
-}
+        function renderError(code) {
+            contentDiv.innerHTML = `
+                <div style="text-align: center; padding: 40px 10px; font-family: 'Courier New', monospace;">
+                    <h1 style="font-size: clamp(3rem, 15vw, 5rem); color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0;">404</h1>
+                    <div style="display: inline-block; max-width: 100%; overflow: hidden;">
+                        <p id="error-status" style="color: #00ff00; font-size: clamp(0.9rem, 4vw, 1.2rem); margin: 15px 0; border-right: 2px solid #00ff00; white-space: nowrap; overflow: hidden; width: 26ch; animation: typing 2s steps(26), blink .5s step-end infinite;">
+                            STATUS: ${code}...
+                        </p>
+                    </div>
+                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 30px; line-height: 1.4;">
+                        The requested writeup is either redacted, moved, or does not exist in the current database.
+                    </p>
+                    <a href="writeups.html" style="background: #00ff00; color: #0a0a0a; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 2px; text-transform: uppercase; display: inline-block;">
+                        > RETURN_TO_HOME
+                    </a>
+                </div>
+                <style>
+                    @keyframes typing { from { width: 0 } }
+                    @keyframes blink { 50% { border-color: transparent } }
+                    @media (max-width: 400px) {
+                        #error-status { 
+                            white-space: normal !important; 
+                            width: auto !important; 
+                            border-right: none !important; 
+                            animation: none !important; 
+                        }
+                    }
+                </style>
+            `;
+        }
     </script>
 </body>
 </html>
