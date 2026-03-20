@@ -39,6 +39,15 @@ body {
     overflow-x: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    
+    /* Sticky Footer Fixes */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1; /* Forces the main content to push the footer down */
 }
 
 .container { 
@@ -299,10 +308,10 @@ input#search-input.filter-dropdown {
    FOOTER
    ============================================================ */
 footer {
-    padding: 3rem 0;
+    padding: 1.5rem 0; /* Reduced padding */
     text-align: center;
     border-top: 1px solid var(--border);
-    margin-top: 2rem;
+    margin-top: 0; /* Removed extra margin */
     color: var(--text-dim);
     font-size: 0.9rem;
 }
