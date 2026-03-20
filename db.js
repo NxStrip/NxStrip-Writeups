@@ -1,26 +1,26 @@
 const writeups = [
     {
-        title: "Bypassing WAF on HackTheBox",
-        date: "2026-03-19",
-        category: "Platform",
-        tag: "HTB",
-        excerpt: "A deep dive into discovery and exploitation.",
-        link: "post.html?file=waf-htb.md" 
+        title: "XSS Reflected: Attribute Injection",
+        date: "2026-03-20",
+        category: "Web",
+        tag: "ROOT-ME",
+        excerpt: "Stealing administrator cookies by breaking out of HTML attributes and using passive event handlers.",
+        link: "post.html?file=rootme-xss-reflected.md" 
     },
     {
-        title: "Web Exploitation 101",
-        date: "2026-03-15",
-        category: "CTF",
-        tag: "BKCTF",
-        excerpt: "Solving the main web challenge.",
-        link: "post.html?file=bkctf-web.md" 
+        title: "XSS Server Side: Local File Read",
+        date: "2026-03-20",
+        category: "Web",
+        tag: "ROOT-ME",
+        excerpt: "Escalating Server-Side XSS in a PDF generator to read local files via the file:// protocol.",
+        link: "post.html?file=rootme-xss-server-side.md" 
     },
     {
-        title: "Active Directory Lab",
-        date: "2026-03-10",
-        category: "Platform",
-        tag: "THM",
-        excerpt: "Setting up a secure environment.",
-        link: "post.html?file=ad-lab.md" 
+        title: "XSS Stored: Blind Cookie Theft",
+        date: "2026-03-20",
+        category: "Web",
+        tag: "ROOT-ME",
+        excerpt: "Using stored JavaScript payloads to exfiltrate administrator session cookies silently.",
+        link: "post.html?file=rootme-xss-stored-1.md" 
     }
 ];
