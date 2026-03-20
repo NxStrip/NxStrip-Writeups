@@ -414,3 +414,35 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent);
 }
+
+/* ============================================================
+   COPY BUTTON STYLING
+   ============================================================ */
+.markdown-body pre {
+    position: relative; /* Allows button to stay in the corner */
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s;
+}
+
+.copy-code-button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #000;
+}
+
+.copy-code-button:active {
+    transform: scale(0.95);
+}
