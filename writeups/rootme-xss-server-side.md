@@ -1,9 +1,9 @@
 # XSS - Server Side (Local File Read via PDF Generator)
 
-> **Date:** March 20, 2026
-> **Platform:** Root-Me
-> **Difficulty:** Medium
-> **Category:** Web / Server-Side Injection
+**Date:** March 20, 2026  
+**Platform:** Root-Me  
+**Difficulty:** Medium  
+**Category:** Web / Server-Side Injection  
 
 ## 📝 Executive Summary
 In this challenge, I bypassed a sanitized client-side input field by identifying an overlooked injection point in the user registration form. This led to a Server-Side XSS vulnerability within a certificate generator (`wkhtmltopdf`), which I escalated to a Local File Read (LFI) to exfiltrate the flag from the server's filesystem.
