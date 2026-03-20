@@ -58,6 +58,8 @@
     </footer>
 
     <script src="db.js"></script>
+    <script src="script.js"></script> 
+    
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('file');
@@ -73,9 +75,10 @@
                     return response.text();
                 })
                 .then(text => {
+                    // 1. Convert Markdown to HTML
                     contentDiv.innerHTML = marked.parse(text);
                     
-                    // Set dynamic title
+                    // 2. Set dynamic title
                     if (postData) {
                         document.title = `${postData.title} | NxStrip Intelligence`;
                     } else {
@@ -83,7 +86,13 @@
                         document.title = `${cleanName} | NxStrip Intelligence`;
                     }
                     
+                    // 3. Highlight code blocks
                     hljs.highlightAll(); 
+
+                    // 4. Inject Copy Buttons (from script.js)
+                    if (typeof addCopyButtons === 'function') {
+                        addCopyButtons();
+                    }
                 })
                 .catch(err => {
                     renderError("NODE_UNREACHABLE");
