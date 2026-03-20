@@ -1,9 +1,9 @@
 # XSS - Stored (Blind Cookie Theft)
 
-> **Date:** March 20, 2026
-> **Platform:** Root-Me
-> **Difficulty:** Easy
-> **Category:** Web / Client-Side
+**Date:** March 20, 2026  
+**Platform:** Root-Me  
+**Difficulty:** Easy  
+**Category:** Web / Client-Side  
 
 ## 📝 Executive Summary
 The objective of this challenge was to exploit a Stored XSS vulnerability in a messaging system to steal an administrator's session cookie. By injecting a "blind" JavaScript payload into the message body, I successfully exfiltrated sensitive data to an external listener when the administrator viewed the post.
