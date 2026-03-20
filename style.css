@@ -37,8 +37,6 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
     
     /* Sticky Footer Fixes */
     display: flex;
@@ -51,7 +49,7 @@ main {
 }
 
 .container { 
-    max-width: 900px; 
+    max-width: 1050px; /* Increased to fit 3 cards perfectly */
     margin: 0 auto; 
     padding: 0 20px; 
 }
@@ -249,7 +247,11 @@ input#search-input.filter-dropdown {
     line-height: 1.7; 
     max-width: 100%; 
     margin: 0 auto; 
+    
+    /* Aggressive word wrapping for long text strings on mobile */
     word-wrap: break-word; 
+    overflow-wrap: anywhere;
+    word-break: break-word; 
 }
 
 /* Metadata Block styling (Date, Platform, etc.) */
@@ -274,6 +276,9 @@ input#search-input.filter-dropdown {
     margin-top: 2rem; 
     margin-bottom: 1rem; 
     font-weight: 600; 
+    word-wrap: break-word; 
+    overflow-wrap: anywhere;
+    word-break: break-word; 
 }
 
 .markdown-body h1 { 
