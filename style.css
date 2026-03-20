@@ -299,10 +299,10 @@ input#search-input.filter-dropdown {
    FOOTER
    ============================================================ */
 footer {
-    padding: 3rem 0;
+    padding: 1.5rem 0; /* Reduced from 3rem */
     text-align: center;
     border-top: 1px solid var(--border);
-    margin-top: 2rem;
+    margin-top: 0; /* Reduced from 2rem */
     color: var(--text-dim);
     font-size: 0.9rem;
 }
