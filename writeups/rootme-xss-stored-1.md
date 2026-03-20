@@ -5,15 +5,11 @@
 > **Difficulty:** Easy
 > **Category:** Web / Client-Side
 
----
-
 ## 📝 Executive Summary
 The objective of this challenge was to exploit a Stored XSS vulnerability in a messaging system to steal an administrator's session cookie. By injecting a "blind" JavaScript payload into the message body, I successfully exfiltrated sensitive data to an external listener when the administrator viewed the post.
 
 ## 🔍 Initial Discovery
 The application features a message board with "Title" and "Body" fields. Testing revealed that the **Message Body** did not sanitize input, allowing for the storage of arbitrary HTML and JavaScript.
-
----
 
 ## 🚀 Exploitation
 
@@ -40,8 +36,6 @@ I chose to use the `Image()` object method. This is stealthier than a `document.
 2. I monitored the Webhook.site dashboard.
 3. Within minutes, the administrator bot visited the page, triggering the background request.
 4. The Admin's session cookie appeared in my logs.
-
----
 
 ## 🛠️ Mitigation & Lessons Learned
 1. **Output Encoding:** All stored data must be HTML-encoded before being rendered in the browser to prevent script execution.
