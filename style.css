@@ -493,3 +493,25 @@ footer {
     padding: 2px 6px;
     border-radius: 4px;
 }
+
+/* =========================================
+   NXSTRIP BRANDING SYNC (Writeups Site)
+   ========================================= */
+
+/* Logo Alignment: Nx (White) Strip (Blue) */
+.logo {
+    color: var(--header-color) !important;
+}
+
+.logo span {
+    color: var(--accent) !important;
+}
+
+/* Hero Alignment: Hi, I'm Nx (White) Strip (Blue) */
+.about-content h1 {
+    color: var(--header-color) !important;
+}
+
+.about-content h1 .highlight {
+    color: var(--accent) !important;
+}
