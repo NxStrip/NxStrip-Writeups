@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>NxStrip | Writeups</title>
+    <title>NxStrip | Technical Writeup</title>
     <meta name="description" content="Detailed security analysis and exploit documentation by NxStrip.">
     <meta name="author" content="NxStrip">
     
@@ -29,7 +29,15 @@
     <nav>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">Nx<span>Strip</span></a>
-            <a href="writeups.html" class="btn-more">← Back To Writeups</a>
+            
+            <ul class="nav-links">
+                <li><a href="https://nxstrip.vercel.app/">About</a></li>
+                <li><a href="writeups.html">Writeups</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <a href="writeups.html" class="btn-more" style="font-size: 0.8rem;">← Back</a>
+            </div>
         </div>
     </nav>
 
@@ -45,10 +53,14 @@
         </div>
     </footer>
 
+    <script src="db.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('file');
         const contentDiv = document.getElementById('content');
+
+        // Find metadata for SEO title update
+        const postData = writeups.find(w => w.file === fileName);
 
         if (fileName) {
             fetch(`writeups/${fileName}`)
@@ -58,8 +70,15 @@
                 })
                 .then(text => {
                     contentDiv.innerHTML = marked.parse(text);
-                    const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
-                    document.title = `${cleanName} | NxStrip Intelligence`;
+                    
+                    // Set dynamic title
+                    if (postData) {
+                        document.title = `${postData.title} | NxStrip Intelligence`;
+                    } else {
+                        const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
+                        document.title = `${cleanName} | NxStrip Intelligence`;
+                    }
+                    
                     hljs.highlightAll(); 
                 })
                 .catch(err => {
@@ -85,18 +104,6 @@
                         > RETURN_TO_HOME
                     </a>
                 </div>
-                <style>
-                    @keyframes typing { from { width: 0 } }
-                    @keyframes blink { 50% { border-color: transparent } }
-                    @media (max-width: 400px) {
-                        #error-status { 
-                            white-space: normal !important; 
-                            width: auto !important; 
-                            border-right: none !important; 
-                            animation: none !important; 
-                        }
-                    }
-                </style>
             `;
         }
     </script>
