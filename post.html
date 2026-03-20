@@ -2,11 +2,27 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Writeup | NxStrip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Intelligence Report | NxStrip</title>
+    <meta name="description" content="Detailed security analysis and exploit documentation by NxStrip.">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="NxStrip | Security Writeup">
+    <meta property="og:description" content="Technical documentation for vulnerability research and CTF challenges.">
+    <meta property="og:image" content="https://nxstrip.vercel.app/assets/Banner.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://nxstrip.vercel.app/assets/Banner.png">
+
+    <meta name="google-site-verification" content="1mSbR5uK103kIENG4MTsjqUqDj8OhXG8KhCVlVGKae4" />
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
     <nav>
@@ -18,47 +34,49 @@
 
     <main class="container section-padding">
         <div id="content" class="markdown-body">
-            <p>Loading exploit data...</p>
+            <p style="color: #00ff00; font-family: 'Courier New', monospace;">Initializing secure connection to database...</p>
         </div>
     </main>
 
     <script>
-// Get the filename from the URL (e.g., post.html?file=waf-bypass.md)
-const urlParams = new URLSearchParams(window.location.search);
-const fileName = urlParams.get('file');
-const contentDiv = document.getElementById('content');
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('file');
+        const contentDiv = document.getElementById('content');
 
-if (fileName) {
-    fetch(`writeups/${fileName}`)
-        .then(response => {
-            if (!response.ok) throw new Error("NODE_UNREACHABLE");
-            return response.text();
-        })
-        .then(text => {
-            contentDiv.innerHTML = marked.parse(text);
-            hljs.highlightAll(); // Syntax highlighting for your code blocks
-        })
-        .catch(err => {
-            renderError("NODE_UNREACHABLE");
-        });
-} else {
-    renderError("NO_FILE_SPECIFIED");
-}
+        if (fileName) {
+            fetch(`writeups/${fileName}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("NODE_UNREACHABLE");
+                    return response.text();
+                })
+                .then(text => {
+                    contentDiv.innerHTML = marked.parse(text);
+                    // Update document title dynamically based on the file name for SEO feel
+                    const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
+                    document.title = `${cleanName} | NxStrip Intelligence`;
+                    hljs.highlightAll(); 
+                })
+                .catch(err => {
+                    renderError("NODE_UNREACHABLE");
+                });
+        } else {
+            renderError("NO_FILE_SPECIFIED");
+        }
 
-function renderError(code) {
-    contentDiv.innerHTML = `
-        <div style="text-align: center; padding: 60px 20px; font-family: 'Courier New', monospace;">
-            <h1 style="font-size: 5rem; color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0;">404</h1>
-            <p style="color: #00ff00; font-size: 1.2rem; margin: 15px 0; border-right: 2px solid #00ff00; display: inline-block; white-space: nowrap; overflow: hidden; width: 26ch; animation: typing 2s steps(26), blink .5s step-end infinite;">STATUS: ${code}...</p>
-            <p style="color: #888; margin-bottom: 30px;">The requested writeup is either redacted, moved, or does not exist in the current database.</p>
-            <a href="writeups.html" style="background: #00ff00; color: #0a0a0a; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 2px; text-transform: uppercase;">> RETURN_TO_GALLERY</a>
-        </div>
-        <style>
-            @keyframes typing { from { width: 0 } }
-            @keyframes blink { 50% { border-color: transparent } }
-        </style>
-    `;
-}
+        function renderError(code) {
+            contentDiv.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px; font-family: 'Courier New', monospace;">
+                    <h1 style="font-size: 5rem; color: #ff0000; text-shadow: 0 0 10px #ff0000; margin: 0;">404</h1>
+                    <p style="color: #00ff00; font-size: 1.2rem; margin: 15px 0; border-right: 2px solid #00ff00; display: inline-block; white-space: nowrap; overflow: hidden; width: 26ch; animation: typing 2s steps(26), blink .5s step-end infinite;">STATUS: ${code}...</p>
+                    <p style="color: #888; margin-bottom: 30px;">The requested intelligence report is missing, redacted, or moved.</p>
+                    <a href="writeups.html" style="background: #00ff00; color: #0a0a0a; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 2px; text-transform: uppercase;">> RETURN_TO_GALLERY</a>
+                </div>
+                <style>
+                    @keyframes typing { from { width: 0 } }
+                    @keyframes blink { 50% { border-color: transparent } }
+                </style>
+            `;
+        }
     </script>
 </body>
 </html>
