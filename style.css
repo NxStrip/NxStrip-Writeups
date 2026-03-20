@@ -1,3 +1,6 @@
+/* ============================================================
+   VARIABLES & THEMES
+   ============================================================ */
 :root[data-theme="dark"] {
     --bg: #0d1117;
     --card-bg: #161b22;
@@ -18,42 +21,153 @@
     --header-color: #1b1f24;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.3s, color 0.3s; }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    transition: background 0.3s, color 0.3s; 
+}
 
 body {
     background-color: var(--bg);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    overflow-x: hidden; /* Prevents accidental horizontal scrolling */
+    overflow-x: hidden;
 }
 
-.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-.section-padding { padding: 3rem 0; } /* Slightly reduced for mobile-friendly spacing */
-.highlight { color: var(--accent); }
+.container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
 
-/* Navigation */
-nav { padding: 1rem 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-nav .container { display: flex; justify-content: space-between; align-items: center; }
-.nav-right { display: flex; align-items: center; gap: 1.5rem; }
-.logo { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-decoration: none; color: var(--header-color); font-size: 1.2rem; }
-.logo span { color: var(--accent); }
-nav ul { display: flex; list-style: none; gap: 1.5rem; }
-nav ul a { text-decoration: none; color: var(--text-dim); font-size: 0.85rem; font-weight: 600; }
-nav ul a.highlight { color: var(--accent); }
+.section-padding { 
+    padding: 3rem 0; 
+}
+
+.highlight { 
+    color: var(--accent); 
+}
+
+/* ============================================================
+   NAVIGATION (Updated for Centering & Size)
+   ============================================================ */
+nav { 
+    padding: 1rem 0; 
+    border-bottom: 1px solid var(--border); 
+    position: sticky; 
+    top: 0; 
+    background: var(--bg); 
+    z-index: 100; 
+}
+
+/* Wrapper allows absolute centering of links relative to the whole bar */
+nav .nav-wrapper { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    position: relative; 
+}
+
+/* Logo - Increased to 1.5rem to match main portfolio */
+.logo { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-weight: 600; 
+    text-decoration: none; 
+    color: var(--header-color); 
+    font-size: 1.5rem; 
+}
+
+.logo span { 
+    color: var(--accent); 
+}
+
+/* Navigation Links - Centered & Increased to 1rem */
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 2rem; 
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--text-dim); 
+    font-size: 1rem; 
+    font-weight: 600; 
+}
+
+.nav-links a:hover,
+.nav-links a.active { 
+    color: var(--accent); 
+}
+
+.nav-right { 
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem; 
+}
 
 /* Theme Toggle */
-#theme-toggle { background: var(--card-bg); border: 1px solid var(--border); padding: 8px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; }
+#theme-toggle { 
+    background: var(--card-bg); 
+    border: 1px solid var(--border); 
+    padding: 8px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 35px; 
+    height: 35px; 
+}
+
+/* ============================================================
+   SECTIONS & CONTENT
+   ============================================================ */
 
 /* About Section */
-.bio { font-size: 1.1rem; color: var(--text-dim); margin-top: 1rem; max-width: 600px; }
+.bio { 
+    font-size: 1.1rem; 
+    color: var(--text-dim); 
+    margin-top: 1rem; 
+    max-width: 600px; 
+}
 
-/* Writeups Grid */
-.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-.btn-more { text-decoration: none; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
-.divider { border: 0; border-top: 1px solid var(--border); margin-bottom: 2rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+/* Header & Grid */
+.section-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 1.5rem; 
+}
 
+.btn-more { 
+    text-decoration: none; 
+    color: var(--accent); 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+}
+
+.divider { 
+    border: 0; 
+    border-top: 1px solid var(--border); 
+    margin-bottom: 2rem; 
+}
+
+.grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 1.2rem; 
+}
+
+/* Writeup Cards */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -65,40 +179,119 @@ nav ul a.highlight { color: var(--accent); }
     height: 100%;
 }
 
-.card:hover { border-color: var(--accent); transform: translateY(-3px); }
-.platform-tag { font-family: 'JetBrains Mono'; font-size: 0.7rem; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-.card h3 { color: var(--header-color); margin-bottom: 0.5rem; font-size: 1.1rem; }
-.card p { color: var(--text-dim); font-size: 0.9rem; flex-grow: 1; }
+.card:hover { 
+    border-color: var(--accent); 
+    transform: translateY(-3px); 
+}
 
-/* Markdown Reader Improvements */
-.markdown-body { font-size: 1.05rem; line-height: 1.7; max-width: 100%; margin: 0 auto; word-wrap: break-word; }
-.markdown-body h1, .markdown-body h2, .markdown-body h3 { color: var(--header-color); margin-top: 2rem; margin-bottom: 1rem; font-weight: 600; }
-.markdown-body h1 { border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; font-size: 1.8rem; }
-.markdown-body pre { background: #000 !important; padding: 1.2rem; border-radius: 8px; border: 1px solid var(--border); overflow-x: auto; margin: 1.5rem 0; }
-.markdown-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-.markdown-body img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 1.5rem 0; }
+.platform-tag { 
+    font-family: 'JetBrains Mono'; 
+    font-size: 0.7rem; 
+    text-transform: uppercase; 
+    color: var(--accent); 
+    margin-bottom: 0.5rem; 
+}
+
+.card h3 { 
+    color: var(--header-color); 
+    margin-bottom: 0.5rem; 
+    font-size: 1.1rem; 
+}
+
+.card p { 
+    color: var(--text-dim); 
+    font-size: 0.9rem; 
+    flex-grow: 1; 
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+
+footer p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   MARKDOWN READER STYLES
+   ============================================================ */
+.markdown-body { 
+    font-size: 1.05rem; 
+    line-height: 1.7; 
+    max-width: 100%; 
+    margin: 0 auto; 
+    word-wrap: break-word; 
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 { 
+    color: var(--header-color); 
+    margin-top: 2rem; 
+    margin-bottom: 1rem; 
+    font-weight: 600; 
+}
+
+.markdown-body h1 { 
+    border-bottom: 2px solid var(--accent); 
+    padding-bottom: 0.5rem; 
+    font-size: 1.8rem; 
+}
+
+.markdown-body pre { 
+    background: #000 !important; 
+    padding: 1.2rem; 
+    border-radius: 8px; 
+    border: 1px solid var(--border); 
+    overflow-x: auto; 
+    margin: 1.5rem 0; 
+}
+
+.markdown-body code { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 0.9rem; 
+}
+
+.markdown-body img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    border: 1px solid var(--border); 
+    margin: 1.5rem 0; 
+}
 
 /* ============================================================
    MOBILE RESPONSIVENESS 
    ============================================================ */
-
 @media (max-width: 600px) {
     .section-padding { padding: 2rem 0; }
     
-    /* Navigation Adjustments */
-    .nav-right { gap: 1rem; }
-    nav ul { gap: 1rem; }
-    .logo { font-size: 1.1rem; }
+    /* Reset absolute centering for mobile to prevent overlap */
+    nav .nav-wrapper { position: static; flex-wrap: wrap; gap: 1rem; }
     
-    /* Bio & Typography */
+    .nav-links { 
+        position: static; 
+        transform: none; 
+        width: 100%; 
+        justify-content: center;
+        order: 3; /* Push links below logo/toggle on tiny screens */
+        gap: 1.5rem;
+    }
+
+    .logo { font-size: 1.3rem; }
+    
     .bio { font-size: 1rem; }
     .markdown-body { font-size: 1rem; }
     .markdown-body h1 { font-size: 1.5rem; }
 
-    /* Filters (for writeups.html) */
+    .grid { grid-template-columns: 1fr; gap: 1rem; }
+    
+    /* Filters (if used in writeups.html) */
     .filters { flex-direction: column; align-items: stretch; gap: 0.8rem; }
     .filter-dropdown { width: 100%; }
-    
-    /* Grid Spacing */
-    .grid { grid-template-columns: 1fr; gap: 1rem; }
 }
