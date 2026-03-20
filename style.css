@@ -299,10 +299,10 @@ input#search-input.filter-dropdown {
    FOOTER
    ============================================================ */
 footer {
-    padding: 1.5rem 0; /* Reduced from 3rem */
+    padding: 3rem 0;
     text-align: center;
     border-top: 1px solid var(--border);
-    margin-top: 0; /* Reduced from 2rem */
+    margin-top: 2rem;
     color: var(--text-dim);
     font-size: 0.9rem;
 }
@@ -514,11 +514,4 @@ footer {
 
 .about-content h1 .highlight {
     color: var(--accent) !important;
-}
-
-/* Sticky Footer Fix for Empty Search Results */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
 }
