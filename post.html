@@ -65,31 +65,63 @@
         const fileName = urlParams.get('file');
         const contentDiv = document.getElementById('content');
 
-        // Find metadata for SEO title update
-        const postData = writeups.find(w => w.file === fileName);
+        /**
+         * SEO & META INJECTION LOGIC
+         */
+        function injectMetadata(post) {
+            if (!post) return;
+
+            // 1. Update Browser Tab Title
+            document.title = `${post.title} | NxStrip Intelligence`;
+
+            // 2. Update Standard Meta Description
+            updateTag('meta[name="description"]', 'content', post.excerpt);
+
+            // 3. Update OpenGraph (Social Media Previews)
+            updateTag('meta[property="og:title"]', 'content', post.title);
+            updateTag('meta[property="og:description"]', 'content', post.excerpt);
+            
+            // 4. Update Twitter
+            updateTag('meta[property="twitter:title"]', 'content', post.title);
+            updateTag('meta[property="twitter:description"]', 'content', post.excerpt);
+        }
+
+        function updateTag(selector, attr, value) {
+            const el = document.querySelector(selector);
+            if (el) el.setAttribute(attr, value);
+        }
+
+        // Find the specific post data from db.js based on the URL parameter
+        // This looks inside the 'link' string for the filename
+        const postData = typeof writeups !== 'undefined' 
+            ? writeups.find(w => w.link.includes(fileName)) 
+            : null;
 
         if (fileName) {
+            // Apply SEO injection immediately if data is found
+            if (postData) {
+                injectMetadata(postData);
+            }
+
             fetch(`writeups/${fileName}`)
                 .then(response => {
                     if (!response.ok) throw new Error("NODE_UNREACHABLE");
                     return response.text();
                 })
                 .then(text => {
-                    // 1. Convert Markdown to HTML
+                    // Convert Markdown to HTML
                     contentDiv.innerHTML = marked.parse(text);
                     
-                    // 2. Set dynamic title
-                    if (postData) {
-                        document.title = `${postData.title} | NxStrip Intelligence`;
-                    } else {
+                    // Fallback Title if not in db.js
+                    if (!postData) {
                         const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
                         document.title = `${cleanName} | NxStrip Intelligence`;
                     }
                     
-                    // 3. Highlight code blocks
+                    // Highlight code blocks
                     hljs.highlightAll(); 
 
-                    // 4. Inject Copy Buttons (from script.js)
+                    // Inject Copy Buttons (from script.js)
                     if (typeof addCopyButtons === 'function') {
                         addCopyButtons();
                     }
