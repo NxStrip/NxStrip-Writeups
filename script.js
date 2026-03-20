@@ -1,33 +1,40 @@
-// --- THEME LOGIC ---
+// ==========================================
+// 🌙 THEME TOGGLE LOGIC
+// ==========================================
 const themeBtn = document.getElementById('theme-toggle');
 const htmlTag = document.documentElement;
 
-themeBtn.addEventListener('click', () => {
-    const newTheme = htmlTag.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    htmlTag.setAttribute('data-theme', newTheme);
-    themeBtn.querySelector('.icon').innerText = newTheme === 'dark' ? '🌙' : '☀️';
-    localStorage.setItem('theme', newTheme);
-});
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        const newTheme = htmlTag.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        htmlTag.setAttribute('data-theme', newTheme);
+        themeBtn.querySelector('.icon').innerText = newTheme === 'dark' ? '🌙' : '☀️';
+        localStorage.setItem('theme', newTheme);
+    });
+}
 
 // Load saved theme
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     htmlTag.setAttribute('data-theme', savedTheme);
-    if(themeBtn) themeBtn.querySelector('.icon').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
+    if (themeBtn) themeBtn.querySelector('.icon').innerText = savedTheme === 'dark' ? '🌙' : '☀️';
 }
 
-// --- ACTIVE LINK HIGHLIGHTING ---
-// This finds which page you are on and highlights the correct nav link
+// ==========================================
+// 🔗 ACTIVE LINK HIGHLIGHTING
+// ==========================================
 const currentPath = window.location.pathname;
 const navLinks = document.querySelectorAll('.nav-links a');
 
 navLinks.forEach(link => {
-    if (link.getAttribute('href').includes(currentPath) && currentPath !== "/") {
+    if (currentPath.includes(link.getAttribute('href')) && link.getAttribute('href') !== "index.html") {
         link.classList.add('active');
     }
 });
 
-// --- CARD GENERATOR ---
+// ==========================================
+// 🃏 CARD GENERATOR
+// ==========================================
 function createCard(post) {
     const card = document.createElement('a');
     card.href = post.link;
@@ -40,47 +47,75 @@ function createCard(post) {
     return card;
 }
 
-// --- HOMEPAGE LOGIC (Latest 3) ---
+// ==========================================
+// 🏠 HOMEPAGE LOGIC (Latest 3)
+// ==========================================
 const latestGrid = document.getElementById('latest-grid');
-if (latestGrid) {
-    // Show only the 3 most recent writeups
+if (latestGrid && typeof writeups !== 'undefined') {
+    latestGrid.innerHTML = '';
     writeups.slice(0, 3).forEach(post => latestGrid.appendChild(createCard(post)));
 }
 
-// --- WRITEUPS PAGE LOGIC (Filtering) ---
+// ==========================================
+// 🔍 WRITEUPS GALLERY & SEARCH LOGIC
+// ==========================================
 const allWriteupsGrid = document.getElementById('all-writeups-grid');
 const platformFilter = document.getElementById('platform-filter');
 const ctfFilter = document.getElementById('ctf-filter');
+const searchInput = document.getElementById('search-input'); // New Search Bar ID
 const resetBtn = document.getElementById('reset-btn');
 
-if (allWriteupsGrid) {
+if (allWriteupsGrid && typeof writeups !== 'undefined') {
     function renderWriteups(data) {
         allWriteupsGrid.innerHTML = '';
+        if (data.length === 0) {
+            allWriteupsGrid.innerHTML = '<p style="color: var(--text-dim); grid-column: 1/-1; text-align: center;">[!] No writeups found matching your query.</p>';
+            return;
+        }
         data.forEach(post => allWriteupsGrid.appendChild(createCard(post)));
     }
 
     renderWriteups(writeups);
 
     function applyFilters() {
-        const platformVal = platformFilter.value;
-        const ctfVal = ctfFilter.value;
-        let filtered = writeups;
+        const platformVal = platformFilter ? platformFilter.value : 'all';
+        const ctfVal = ctfFilter ? ctfFilter.value : 'all';
+        const searchVal = searchInput ? searchInput.value.toLowerCase() : '';
 
-        if (platformVal !== 'all') {
-            filtered = filtered.filter(w => w.category === 'Platform' && w.tag === platformVal);
-            ctfFilter.value = 'all'; 
-        } else if (ctfVal !== 'all') {
-            filtered = filtered.filter(w => w.category === 'CTF' && w.tag === ctfVal);
-            platformFilter.value = 'all';
-        }
+        let filtered = writeups.filter(post => {
+            // Match Platform/Tag
+            const matchesPlatform = platformVal === 'all' || post.tag === platformVal;
+            // Match CTF Tag
+            const matchesCTF = ctfVal === 'all' || post.tag === ctfVal;
+            // Match Search Query (Title or Excerpt)
+            const matchesSearch = post.title.toLowerCase().includes(searchVal) || 
+                                 post.excerpt.toLowerCase().includes(searchVal);
+
+            return matchesPlatform && matchesCTF && matchesSearch;
+        });
+
         renderWriteups(filtered);
     }
 
-    platformFilter.addEventListener('change', applyFilters);
-    ctfFilter.addEventListener('change', applyFilters);
-    resetBtn.addEventListener('click', () => {
-        platformFilter.value = 'all';
-        ctfFilter.value = 'all';
-        renderWriteups(writeups);
+    // Event Listeners
+    if (platformFilter) platformFilter.addEventListener('change', () => {
+        if(ctfFilter) ctfFilter.value = 'all'; // Mutual exclusivity
+        applyFilters();
     });
+
+    if (ctfFilter) ctfFilter.addEventListener('change', () => {
+        if(platformFilter) platformFilter.value = 'all'; // Mutual exclusivity
+        applyFilters();
+    });
+
+    if (searchInput) searchInput.addEventListener('input', applyFilters);
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if (platformFilter) platformFilter.value = 'all';
+            if (ctfFilter) ctfFilter.value = 'all';
+            if (searchInput) searchInput.value = '';
+            renderWriteups(writeups);
+        });
+    }
 }
