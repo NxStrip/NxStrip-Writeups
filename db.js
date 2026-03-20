@@ -1,5 +1,21 @@
 const writeups = [
     {
+        title: "SQL Injection - File Reading & Source Analysis",
+        date: "2026-03-20",
+        category: "Web",
+        tag: "ROOT-ME",
+        excerpt: "Leveraging UNION-based SQLi to read server-side source code and reverse XOR-encrypted credentials.",
+        link: "post.html?file=rootme-sqli-file-read.md" 
+    },
+    {
+        title: "SQL Injection - Authentication Bypass",
+        date: "2026-03-20",
+        category: "Web",
+        tag: "ROOT-ME",
+        excerpt: "Bypassing authentication gates by manipulating backend SQL queries using tautologies and comments.",
+        link: "post.html?file=rootme-sql-injection-auth.md" 
+    },
+    {
         title: "XSS Reflected: Attribute Injection",
         date: "2026-03-20",
         category: "Web",
