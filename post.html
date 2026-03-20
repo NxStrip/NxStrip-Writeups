@@ -71,34 +71,64 @@
         function injectMetadata(post) {
             if (!post) return;
 
+            const baseUrl = "https://nxstrip-writeups.vercel.app/post.html";
+            const canonicalUrl = `${baseUrl}?file=${fileName}`;
+
             // 1. Update Browser Tab Title
             document.title = `${post.title} | NxStrip Intelligence`;
 
             // 2. Update Standard Meta Description
             updateTag('meta[name="description"]', 'content', post.excerpt);
+            
+            // 3. Update Keywords
+            if (post.keywords) {
+                updateTag('meta[name="keywords"]', 'content', post.keywords);
+            }
 
-            // 3. Update OpenGraph (Social Media Previews)
+            // 4. Update OpenGraph (Social Media)
             updateTag('meta[property="og:title"]', 'content', post.title);
             updateTag('meta[property="og:description"]', 'content', post.excerpt);
+            updateTag('meta[property="og:url"]', 'content', canonicalUrl);
             
-            // 4. Update Twitter
+            // 5. Update Twitter
             updateTag('meta[property="twitter:title"]', 'content', post.title);
             updateTag('meta[property="twitter:description"]', 'content', post.excerpt);
+
+            // 6. Inject/Update Canonical Link
+            let canonicalLink = document.querySelector('link[rel="canonical"]');
+            if (!canonicalLink) {
+                canonicalLink = document.createElement('link');
+                canonicalLink.setAttribute('rel', 'canonical');
+                document.head.appendChild(canonicalLink);
+            }
+            canonicalLink.setAttribute('href', canonicalUrl);
         }
 
+        // Improved helper to find or create tags
         function updateTag(selector, attr, value) {
-            const el = document.querySelector(selector);
-            if (el) el.setAttribute(attr, value);
+            let el = document.querySelector(selector);
+            if (!el) {
+                // If the meta tag doesn't exist, create it
+                el = document.createElement('meta');
+                if (selector.includes('property')) {
+                    const prop = selector.match(/property="(.+?)"/)[1];
+                    el.setAttribute('property', prop);
+                } else {
+                    const name = selector.match(/name="(.+?)"/)[1];
+                    el.setAttribute('name', name);
+                }
+                document.head.appendChild(el);
+            }
+            el.setAttribute(attr, value);
         }
 
-        // Find the specific post data from db.js based on the URL parameter
-        // This looks inside the 'link' string for the filename
+        // Lookup postData in db.js
         const postData = typeof writeups !== 'undefined' 
             ? writeups.find(w => w.link.includes(fileName)) 
             : null;
 
         if (fileName) {
-            // Apply SEO injection immediately if data is found
+            // Apply SEO injection immediately
             if (postData) {
                 injectMetadata(postData);
             }
@@ -109,19 +139,15 @@
                     return response.text();
                 })
                 .then(text => {
-                    // Convert Markdown to HTML
                     contentDiv.innerHTML = marked.parse(text);
                     
-                    // Fallback Title if not in db.js
                     if (!postData) {
                         const cleanName = fileName.replace('.md', '').replace(/-/g, ' ').toUpperCase();
                         document.title = `${cleanName} | NxStrip Intelligence`;
                     }
                     
-                    // Highlight code blocks
                     hljs.highlightAll(); 
 
-                    // Inject Copy Buttons (from script.js)
                     if (typeof addCopyButtons === 'function') {
                         addCopyButtons();
                     }
