@@ -59,5 +59,3 @@ To capture the flag, I needed to exfiltrate the `document.cookie` to an attacker
 2. **Content Security Policy (CSP):** Implementing a strict CSP that disallows inline scripts and `eval()` would have mitigated this attack, even if the injection was successful.
 3. **Input Validation:** Use a whitelist of allowed paths for the `?p=` parameter instead of reflecting raw user input.
 ```
-
-Would you like to move on to the next one? Send the raw notes over and I'll wrap them up just like this.
