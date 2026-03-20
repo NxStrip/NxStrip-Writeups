@@ -37,6 +37,8 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .container { 
@@ -309,9 +311,19 @@ footer {
    MOBILE RESPONSIVENESS 
    ============================================================ */
 @media (max-width: 600px) {
+    /* Gives the whole page breathing room on the sides */
+    .container { padding: 0 15px; }
     .section-padding { padding: 2rem 0; }
     
-    nav .nav-wrapper { position: static; flex-wrap: wrap; gap: 1rem; }
+    /* Pulls the logo and moon icon away from the screen bezels */
+    nav { padding: 1rem 15px; }
+    
+    nav .nav-wrapper { 
+        position: static; 
+        flex-wrap: wrap; 
+        justify-content: space-between; /* Keeps logo left, moon right */
+        gap: 1rem; 
+    }
     
     .nav-links { 
         position: static; 
@@ -320,14 +332,31 @@ footer {
         justify-content: center;
         order: 3;
         gap: 1.5rem;
+        margin-top: 0.5rem; /* Space between header and links */
+    }
+
+    /* Forces cards to fit the mobile screen perfectly */
+    .grid {
+        grid-template-columns: 1fr; 
     }
 
     input#search-input.filter-dropdown {
         width: 100%;
         flex: none;
+        margin-bottom: 0.5rem; /* Adds space if filters stack */
     }
 
     .logo { font-size: 1.3rem; }
+
+    /* Shrink the big headers slightly on mobile so they fit */
+    .markdown-body h1 { font-size: 1.5rem; }
+    .markdown-body h2 { font-size: 1.3rem; }
+    
+    /* Ensure markdown blocks don't touch the very edges */
+    .markdown-body blockquote {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
 }
 
 /* ============================================================
