@@ -39,6 +39,9 @@ body {
     overflow-x: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
 .container { 
