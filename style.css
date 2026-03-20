@@ -329,3 +329,88 @@ footer {
 
     .logo { font-size: 1.3rem; }
 }
+
+/* ============================================================
+   LIST FIXES (Aligns numbers/bullets & adds Blue Accent)
+   ============================================================ */
+
+/* 1. Fix for list numbers/bullets breaking out of the container */
+.markdown-body ol, 
+.markdown-body ul {
+    padding-left: 2rem; 
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body li {
+    margin-bottom: 0.5rem;
+}
+
+/* 2. Fix for nested lists spacing */
+.markdown-body li > ul,
+.markdown-body li > ol {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+
+/* 3. Blue Red-Team Style Numbers for Ordered Lists */
+.markdown-body ol {
+    list-style: none; /* Removes default numbers */
+    counter-reset: my-awesome-counter;
+}
+
+.markdown-body ol li {
+    counter-increment: my-awesome-counter;
+    position: relative;
+}
+
+.markdown-body ol li::before {
+    content: counter(my-awesome-counter) ". ";
+    color: var(--accent); /* Uses your blue theme color */
+    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+    margin-right: 8px;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBARS (Code Blocks & Global)
+   ============================================================ */
+
+/* Target the scrollbar for code blocks specifically */
+.markdown-body pre::-webkit-scrollbar {
+    height: 8px; /* Height of horizontal scrollbar */
+    width: 8px;  /* Width of vertical scrollbar */
+}
+
+.markdown-body pre::-webkit-scrollbar-track {
+    background: #000; /* Matches your code block background */
+    border-radius: 8px;
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb {
+    background: var(--border); /* Subtle grey thumb */
+    border-radius: 8px;
+    border: 2px solid #000; /* Creates a "padding" effect */
+}
+
+.markdown-body pre::-webkit-scrollbar-thumb:hover {
+    background: var(--accent); /* Turns blue when you hover over it */
+}
+
+/* Optional: Apply a slim theme-matching scrollbar to the whole page */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+    border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
