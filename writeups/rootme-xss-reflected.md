@@ -5,8 +5,6 @@
 > **Difficulty:** Easy
 > **Category:** Web / Client-Side
 
----
-
 ## 📝 Executive Summary
 This challenge demonstrates a reflected Cross-Site Scripting (XSS) vulnerability via HTML attribute injection. By breaking out of an existing `<a>` tag attribute, I was able to inject a malicious event handler to steal the administrator's session cookie without requiring a direct click.
 
@@ -22,8 +20,6 @@ The vulnerable endpoint was identified at:
 
 The parameter `?p=` is reflected directly into the source code. Upon inspection, I found the input lands inside an anchor tag attribute:
 `<a href='[INJECTION_HERE]'>Contact</a>`
-
----
 
 ## 🚀 Exploitation
 
@@ -52,7 +48,6 @@ To capture the flag, I needed to exfiltrate the `document.cookie` to an attacker
 3. As the Admin moves their mouse to navigate (no click required), the `onmouseover` event triggers.
 4. The browser is forced to redirect to my Webhook, appending the Admin's session cookie as a URL parameter.
 
----
 
 ## 🛠️ Mitigation & Lessons Learned
 1. **Context-Aware Encoding:** The application should use an HTML entity encoder specifically designed for attributes. In this case, single quotes should be encoded as `&#39;` or `&apos;`.
