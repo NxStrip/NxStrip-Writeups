@@ -54,7 +54,7 @@ body {
 }
 
 /* ============================================================
-   NAVIGATION (Updated for Centering & Size)
+   NAVIGATION (Centered Links & Larger Logo)
    ============================================================ */
 nav { 
     padding: 1rem 0; 
@@ -65,7 +65,6 @@ nav {
     z-index: 100; 
 }
 
-/* Wrapper allows absolute centering of links relative to the whole bar */
 nav .nav-wrapper { 
     display: flex; 
     justify-content: space-between; 
@@ -73,7 +72,6 @@ nav .nav-wrapper {
     position: relative; 
 }
 
-/* Logo - Increased to 1.5rem to match main portfolio */
 .logo { 
     font-family: 'JetBrains Mono', monospace; 
     font-weight: 600; 
@@ -82,11 +80,8 @@ nav .nav-wrapper {
     font-size: 1.5rem; 
 }
 
-.logo span { 
-    color: var(--accent); 
-}
+.logo span { color: var(--accent); }
 
-/* Navigation Links - Centered & Increased to 1rem */
 .nav-links { 
     display: flex; 
     list-style: none; 
@@ -114,7 +109,6 @@ nav .nav-wrapper {
     gap: 1.5rem; 
 }
 
-/* Theme Toggle */
 #theme-toggle { 
     background: var(--card-bg); 
     border: 1px solid var(--border); 
@@ -129,18 +123,51 @@ nav .nav-wrapper {
 }
 
 /* ============================================================
-   SECTIONS & CONTENT
+   FILTERS & SEARCH BAR
    ============================================================ */
-
-/* About Section */
-.bio { 
-    font-size: 1.1rem; 
-    color: var(--text-dim); 
-    margin-top: 1rem; 
-    max-width: 600px; 
+.filters { 
+    margin-bottom: 2rem; 
+    display: flex; 
+    gap: 1rem; 
+    flex-wrap: wrap; 
+    align-items: center; 
 }
 
-/* Header & Grid */
+.filter-dropdown {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input#search-input.filter-dropdown {
+    cursor: text;
+    flex: 1;
+    min-width: 250px;
+}
+
+.filter-dropdown:focus { border-color: var(--accent); }
+
+.reset-btn {
+    background: transparent; 
+    color: var(--text-dim); 
+    border: none; 
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 0.8rem;
+}
+
+.reset-btn:hover { color: var(--accent); }
+
+/* ============================================================
+   WRITEUP CARDS GRID
+   ============================================================ */
 .section-header { 
     display: flex; 
     justify-content: space-between; 
@@ -167,7 +194,6 @@ nav .nav-wrapper {
     gap: 1.2rem; 
 }
 
-/* Writeup Cards */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -205,22 +231,7 @@ nav .nav-wrapper {
 }
 
 /* ============================================================
-   FOOTER
-   ============================================================ */
-footer {
-    padding: 2rem 0;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    margin-top: 2rem;
-}
-
-footer p {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-}
-
-/* ============================================================
-   MARKDOWN READER STYLES
+   MARKDOWN READER (POSTS)
    ============================================================ */
 .markdown-body { 
     font-size: 1.05rem; 
@@ -228,6 +239,23 @@ footer p {
     max-width: 100%; 
     margin: 0 auto; 
     word-wrap: break-word; 
+}
+
+/* Metadata Block styling (Date, Platform, etc.) */
+.markdown-body blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+    color: var(--text-main);
+}
+
+.markdown-body blockquote p {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 { 
@@ -266,12 +294,23 @@ footer p {
 }
 
 /* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+    padding: 3rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* ============================================================
    MOBILE RESPONSIVENESS 
    ============================================================ */
 @media (max-width: 600px) {
     .section-padding { padding: 2rem 0; }
     
-    /* Reset absolute centering for mobile to prevent overlap */
     nav .nav-wrapper { position: static; flex-wrap: wrap; gap: 1rem; }
     
     .nav-links { 
@@ -279,45 +318,14 @@ footer p {
         transform: none; 
         width: 100%; 
         justify-content: center;
-        order: 3; /* Push links below logo/toggle on tiny screens */
+        order: 3;
         gap: 1.5rem;
     }
 
+    input#search-input.filter-dropdown {
+        width: 100%;
+        flex: none;
+    }
+
     .logo { font-size: 1.3rem; }
-    
-    .bio { font-size: 1rem; }
-    .markdown-body { font-size: 1rem; }
-    .markdown-body h1 { font-size: 1.5rem; }
-
-    .grid { grid-template-columns: 1fr; gap: 1rem; }
-    
-    /* Filters (if used in writeups.html) */
-    .filters { flex-direction: column; align-items: stretch; gap: 0.8rem; }
-    .filter-dropdown { width: 100%; }
-}
-
-/* Styling for the Writeup Metadata */
-.markdown-body blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 1rem 1.5rem;
-    background: var(--card-bg);
-    border-radius: 0 8px 8px 0;
-    margin: 1.5rem 0;
-    color: var(--text-main);
-}
-
-.markdown-body blockquote p {
-    margin: 0;
-    display: flex;
-    flex-direction: column; /* This forces the stack! */
-    gap: 0.5rem;
-}
-
-/* Optional: Removes the horizontal line if it's too distracting */
-.markdown-body hr {
-    height: 1px;
-    background-color: var(--border);
-    border: none;
-    margin: 2rem 0;
-    opacity: 0.5;
 }
