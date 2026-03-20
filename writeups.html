@@ -34,6 +34,8 @@
 
     <style>
         .filters { margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+        
+        /* Updated to support the search input */
         .filter-dropdown {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -44,13 +46,31 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             outline: none;
+            transition: border-color 0.3s;
         }
+
+        /* Styling for the text input specifically */
+        input#search-input.filter-dropdown {
+            cursor: text;
+            flex: 1;
+            min-width: 250px;
+        }
+
         .filter-dropdown:focus { border-color: var(--accent); }
+        
         .reset-btn {
             background: transparent; color: var(--text-dim); border: none; cursor: pointer;
             font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+            padding: 10px 5px;
         }
         .reset-btn:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            input#search-input.filter-dropdown {
+                width: 100%;
+                flex: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -76,6 +96,8 @@
         <h1 style="margin-bottom: 2rem;">All Writeups</h1>
         
         <div class="filters">
+            <input type="text" id="search-input" placeholder="Search by title or content..." class="filter-dropdown">
+
             <select id="platform-filter" class="filter-dropdown">
                 <option value="all">🎯 Select Platform...</option>
                 <option value="HTB">HackTheBox (HTB)</option>
