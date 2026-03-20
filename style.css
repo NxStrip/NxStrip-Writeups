@@ -37,19 +37,12 @@ body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    
-    /* Sticky Footer Fixes */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex-grow: 1; /* Forces the main content to push the footer down */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .container { 
-    max-width: 1050px; /* Increased to fit 3 cards perfectly */
+    max-width: 900px; 
     margin: 0 auto; 
     padding: 0 20px; 
 }
@@ -247,11 +240,7 @@ input#search-input.filter-dropdown {
     line-height: 1.7; 
     max-width: 100%; 
     margin: 0 auto; 
-    
-    /* Aggressive word wrapping for long text strings on mobile */
     word-wrap: break-word; 
-    overflow-wrap: anywhere;
-    word-break: break-word; 
 }
 
 /* Metadata Block styling (Date, Platform, etc.) */
@@ -276,9 +265,6 @@ input#search-input.filter-dropdown {
     margin-top: 2rem; 
     margin-bottom: 1rem; 
     font-weight: 600; 
-    word-wrap: break-word; 
-    overflow-wrap: anywhere;
-    word-break: break-word; 
 }
 
 .markdown-body h1 { 
@@ -313,10 +299,10 @@ input#search-input.filter-dropdown {
    FOOTER
    ============================================================ */
 footer {
-    padding: 1.5rem 0; /* Reduced padding */
+    padding: 3rem 0;
     text-align: center;
     border-top: 1px solid var(--border);
-    margin-top: 0; /* Removed extra margin */
+    margin-top: 2rem;
     color: var(--text-dim);
     font-size: 0.9rem;
 }
