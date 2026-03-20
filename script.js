@@ -40,7 +40,10 @@ function createCard(post) {
     card.href = post.link;
     card.className = 'card';
     card.innerHTML = `
-        <span class="platform-tag">${post.tag}</span>
+        <div class="card-tags">
+            <span class="platform-tag">${post.tag}</span>
+            <span class="category-tag">${post.category}</span>
+        </div>
         <h3>${post.title}</h3>
         <p>${post.excerpt}</p>
     `;
