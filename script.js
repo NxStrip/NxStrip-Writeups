@@ -72,7 +72,7 @@ if (allWriteupsGrid && typeof writeups !== 'undefined') {
     function renderWriteups(data) {
         allWriteupsGrid.innerHTML = '';
         if (data.length === 0) {
-            allWriteupsGrid.innerHTML = '<p style="color: var(--text-dim); grid-column: 1/-1; text-align: center;">[!] No writeups found matching your query.</p>';
+            allWriteupsGrid.innerHTML = '<div class="empty-state"><p>[!] No writeups found matching your query.</p></div>';
             return;
         }
         data.forEach(post => allWriteupsGrid.appendChild(createCard(post)));

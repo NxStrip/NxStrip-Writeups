@@ -196,6 +196,25 @@ input#search-input.filter-dropdown {
     gap: 1.2rem; 
 }
 
+.writeups-grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    align-content: start;
+    min-height: 32vh;
+}
+
+.empty-state {
+    min-height: 32vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--text-dim);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+    padding: 1.5rem;
+}
+
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -299,12 +318,24 @@ input#search-input.filter-dropdown {
    FOOTER
    ============================================================ */
 footer {
-    padding: 3rem 0;
+    padding: 0;
     text-align: center;
     border-top: 1px solid var(--border);
-    margin-top: 2rem;
+    margin-top: clamp(4rem, 8vw, 6rem);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.12) 100%), var(--bg);
     color: var(--text-dim);
     font-size: 0.9rem;
+}
+
+footer .container {
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    letter-spacing: 0.02em;
 }
 
 /* ============================================================
@@ -340,6 +371,16 @@ footer {
         grid-template-columns: 1fr; 
     }
 
+    .writeups-grid {
+        gap: 1.2rem;
+        min-height: 24vh;
+    }
+
+    .empty-state {
+        min-height: 24vh;
+        padding: 1.25rem;
+    }
+
     input#search-input.filter-dropdown {
         width: 100%;
         flex: none;
@@ -356,6 +397,14 @@ footer {
     .markdown-body blockquote {
         padding: 1rem;
         margin: 1rem 0;
+    }
+
+    footer {
+        margin-top: 3rem;
+    }
+
+    footer .container {
+        min-height: 78px;
     }
 }
 
